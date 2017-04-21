@@ -1,3 +1,4 @@
+import assign from 'object.assign';
 import Literal from '../Literal';
 import JSXElement from '../JSXElement';
 import Identifier from './Identifier';
@@ -41,7 +42,7 @@ const TYPES = {
 const noop = () => null;
 
 // Composition map of types to their extractor functions to handle literals.
-const LITERAL_TYPES = Object.assign({}, TYPES, {
+const LITERAL_TYPES = assign({}, TYPES, {
   Literal: (value) => {
     const extractedVal = TYPES.Literal.call(undefined, value);
     const isNull = extractedVal === null;
@@ -96,10 +97,7 @@ export default function extract(value) {
   // Value will not have the expression property when we recurse.
   // The type for expression on ArrowFunctionExpression is a boolean.
   let expression;
-  if (
-    typeof value.expression !== 'boolean'
-    && value.expression
-  ) {
+  if (typeof value.expression !== 'boolean' && value.expression) {
     expression = value.expression;
   } else {
     expression = value;

@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "rimraf lib && babel src --out-dir lib",
-    "prepublish": "npm run lint && npm run test && npm run build",
+    "prepublish": "in-install || (npm run lint && npm run test && npm run build)",
     "coveralls": "cat ./reports/lcov.info | coveralls",
     "lint": "eslint  --config .eslintrc .",
     "lint:fix": "npm run lint -- --fix",
@@ -26,6 +26,7 @@
     "eslint": "^3.12.1",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.2.0",
+    "in-publish": "^2.0.0",
     "jest": "^19.0.0",
     "rimraf": "^2.5.2"
   },
